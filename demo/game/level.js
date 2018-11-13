@@ -1,21 +1,21 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { autorun } from 'mobx';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import { autorun } from "mobx";
 
-import { TileMap } from '../../src';
+import { TileMap } from "../../src";
 
-import GameStore from './stores/game-store';
+import GameStore from "./stores/game-store";
 
 export default class Level extends Component {
   static contextTypes = {
-    scale: PropTypes.number,
+    scale: PropTypes.number
   };
 
   constructor(props) {
     super(props);
 
     this.state = {
-      stageX: 0,
+      stageX: 0
     };
   }
 
@@ -23,7 +23,7 @@ export default class Level extends Component {
     this.cameraWatcher = autorun(() => {
       const targetX = Math.round(GameStore.stageX * this.context.scale);
       this.setState({
-        stageX: targetX,
+        stageX: targetX
       });
     });
   }
@@ -31,7 +31,7 @@ export default class Level extends Component {
   componentWillReceiveProps(nextProps, nextContext) {
     const targetX = Math.round(GameStore.stageX * nextContext.scale);
     this.setState({
-      stageX: targetX,
+      stageX: targetX
     });
   }
 
@@ -41,9 +41,9 @@ export default class Level extends Component {
 
   getWrapperStyles() {
     return {
-      position: 'absolute',
+      position: "absolute",
       transform: `translate(${this.state.stageX}px, 0px) translateZ(0)`,
-      transformOrigin: 'top left',
+      transformOrigin: "top left"
     };
   }
 
@@ -51,121 +51,20 @@ export default class Level extends Component {
     return (
       <div style={this.getWrapperStyles()}>
         <TileMap
-          style={{ top: Math.floor(64 * this.context.scale) }}
-          src="assets/boardwalktile.png"
-          tileSize={128}
-          columns={24}
-          rows={4}
+          // style={{ top: Math.floor(64 * this.context.scale) }}
+          src="assets/Bacon.png"
+          tileSize={150}
+          columns={8}
+          rows={5}
           layers={[
-            [
-              0,
-              0,
-              0,
-              0,
-              0,
-              0,
-              0,
-              0,
-              0,
-              0,
-              0,
-              0,
-              0,
-              0,
-              0,
-              0,
-              0,
-              0,
-              0,
-              0,
-              0,
-              0,
-              0,
-              0,
-              0,
-              0,
-              0,
-              0,
-              0,
-              0,
-              0,
-              0,
-              0,
-              0,
-              0,
-              0,
-              0,
-              0,
-              0,
-              0,
-              0,
-              0,
-              0,
-              0,
-              0,
-              0,
-              0,
-              0,
-              0,
-              0,
-              0,
-              0,
-              0,
-              0,
-              0,
-              0,
-              0,
-              0,
-              0,
-              0,
-              0,
-              0,
-              0,
-              0,
-              0,
-              0,
-              0,
-              0,
-              0,
-              0,
-              0,
-              0,
-              1,
-              1,
-              1,
-              1,
-              1,
-              1,
-              1,
-              1,
-              1,
-              1,
-              1,
-              1,
-              1,
-              1,
-              1,
-              1,
-              1,
-              1,
-              1,
-              1,
-              1,
-              1,
-              1,
-              1,
-            ],
+            [0, 0, 0, 0, 0, 0, 0, 0,
+              0, 0, 0, 0, 0, 0, 0, 1,
+              0, 0, 0, 0, 0, 0, 0, 0,
+              0, 0, 0, 0, 0, 0, 0, 0,
+              0, 0, 0, 0, 0, 0, 0, 0,]
           ]}
         />
-        <TileMap
-          style={{ top: Math.floor(-63 * this.context.scale) }}
-          src="assets/buildings.png"
-          rows={1}
-          columns={6}
-          tileSize={512}
-          layers={[[1, 2, 3, 4, 5, 6]]}
-        />
-      </div>
+      </div >
     );
   }
 }

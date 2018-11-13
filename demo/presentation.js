@@ -1,8 +1,7 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 
-import Intro from './intro';
-import Game from './game';
-import Slides from './slides';
+import Intro from "./intro";
+import Game from "./game";
 
 export default class Presentation extends Component {
   constructor(props) {
@@ -10,39 +9,34 @@ export default class Presentation extends Component {
 
     this.state = {
       gameState: 0,
-      slideIndex: 0,
+      slideIndex: 0
     };
-
-    this.handleStart = this.handleStart.bind(this);
-    this.handleDone = this.handleDone.bind(this);
-    this.handleLeave = this.handleLeave.bind(this);
   }
 
   render() {
     this.gameStates = [
       <Intro onStart={this.handleStart} />,
-      <Game onLeave={this.handleLeave} />,
-      <Slides onDone={this.handleDone} index={this.state.slideIndex} />,
+      <Game onLeave={this.handleLeave} />
     ];
     return this.gameStates[this.state.gameState];
   }
 
-  handleStart() {
+  handleStart = () => {
     this.setState({
-      gameState: 1,
+      gameState: 1
     });
   };
 
-  handleDone() {
+  handleDone = () => {
     this.setState({
-      gameState: 1,
+      gameState: 1
     });
   };
 
-  handleLeave(index) {
+  handleLeave = index => {
     this.setState({
       gameState: 2,
-      slideIndex: index,
+      slideIndex: index
     });
   };
 }

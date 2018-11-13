@@ -1,7 +1,7 @@
 import { observable } from 'mobx';
 
 class GameStore {
-  @observable characterPosition = { x: 0, y: 0 };
+  @observable characterPosition = { x: 50, y: 0 };
 
   @observable stageX = 0;
 
