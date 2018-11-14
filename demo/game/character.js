@@ -62,6 +62,8 @@ export default class Character extends Component {
   render() {
     const x = this.props.store.characterPosition.x;
 
+    //constant x position at 441.439
+
     return (
       <div style={this.getWrapperStyles()}>
         <Body
@@ -74,7 +76,7 @@ export default class Character extends Component {
           <Sprite
             repeat={this.state.repeat}
             onPlayStateChanged={this.handlePlayStateChanged}
-            src="assets/DinoSprites - vita.png"
+            src="/assets/DinoSprites - vita.png"
             scale={this.context.scale * 5}
             state={this.state.characterState}
             // steps={[9, 9, 0, 4, 5]}
@@ -97,11 +99,16 @@ export default class Character extends Component {
     Matter.Body.setVelocity(body, { x, y: 0 });
   }
 
-  jump(body) {
+  moveToMiddle(body) {
+    Matter.Body.setVelocity(body, { x: 2, y: 0 })
+  }
+
+  jump = (body) => {
     this.jumpNoise.play();
     this.isJumping = true;
-    Matter.Body.applyForce(body, { x: 0, y: 0 }, { x: 0, y: -0.18 });
+    Matter.Body.applyForce(body, { x: 0, y: 0 }, { x: 0, y: -0.16 });
     Matter.Body.set(body, "friction", 0.0001);
+    this.props.bacon();
   }
 
   checkKeys(shouldMoveStageLeft, shouldMoveStageRight) {
@@ -115,18 +122,11 @@ export default class Character extends Component {
       characterState = 0
     }
 
-    if (keys.isDown(keys.LEFT)) {
-      if (shouldMoveStageLeft) {
-        store.setStageX(store.stageX + 5);
-      }
-      this.move(body, -5);
-      characterState = 1;
-    } else if (keys.isDown(keys.RIGHT) === false) {
+    if (keys.isDown(keys.RIGHT) === false) {
       if (shouldMoveStageRight) {
         store.setStageX(store.stageX - 5);
       }
 
-      this.move(body, 5);
       characterState = 0;
     }
 
@@ -151,6 +151,10 @@ export default class Character extends Component {
     if (velY === 0) {
       this.isJumping = false;
       Matter.Body.set(body, "friction", 0.9999);
+    }
+
+    if (midPoint - body.position.x > 10) {
+      this.moveToMiddle(body)
     }
 
     if (!this.isJumping && !this.isPunching && !this.isLeaving) {

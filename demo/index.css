@@ -52,6 +52,15 @@ pre {
   display: block;
 }
 
+.retro {
+  font-family: "8BIT WONDER";
+  display: block;
+  width: 400px;
+  font-size: 24px;
+  margin: -1% auto 0px;
+  color:whitesmoke
+}
+
 .start {
   font-family: "8BIT WONDER";
   display: block;
@@ -60,6 +69,23 @@ pre {
   margin: -1% auto 0px;
   text-align: center;
   color: white;
+}
+
+.collected {
+  font-family: "8BIT WONDER";
+  position: absolute;
+  top: 8px;
+  left: 16px;
+  font-size: 36px;
+}
+
+.quit {
+  font-family: "8BIT WONDER";
+  position: absolute;
+  z-index: 300;
+  top: 8px;
+  right: 16px;
+  font-size: 36px;
 }
 
 .fade {
@@ -85,5 +111,36 @@ pre {
 #help {
   text-align: center;
   margin-top: 20px;
+}
+
+ul {
+  list-style-type: none;
+  margin: 5px;
+  padding: 0;
+  overflow: hidden;
+}
+
+nav {
+  position: sticky;
+  z-index: 5;
+  /* margin-top: 10px;
+  margin-left: 10px; */
+  margin-bottom: 40px;
+  padding-left: 300px;
+}
+
+li  {
+  float: left;
+  display: flex;
+  color: whitesmoke;
+  text-align: center;
+  padding: 5px 5px;
+  text-decoration: none;
+}
+
+#inDiv{
+  position: relative;
+  height:85%;
+  z-index: 10;
 }
 

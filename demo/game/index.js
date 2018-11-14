@@ -13,21 +13,28 @@ import GameStore from "./stores/game-store";
 // import Obstacle from "../obstacle";
 
 export default class Game extends Component {
-  static propTypes = {
-    onLeave: PropTypes.func
-  };
+  // static propTypes = {
+  //   onLeave: PropTypes.func
+  // };
+
+  state = {
+    collected: 0
+  }
 
   componentDidMount() {
-    this.player = new AudioPlayer("/assets/summer.mp3", () => {
+    this.player = new AudioPlayer("../assets/park.mp3", () => {
       this.stopMusic = this.player.play({
         loop: true,
         offset: 1,
-        volume: 0.35
+        volume: 1.5
       });
     });
 
+    this.coinNoise = new AudioPlayer("/assets/coin.mp3");
+
     this.setState({
-      fade: false
+      fade: false,
+      collected: 0
     });
 
     this.keyListener.subscribe([
@@ -40,15 +47,25 @@ export default class Game extends Component {
     this.keyListener.unsubscribe();
   }
 
+  handleBacon = () => {
+    setTimeout(() => {
+      this.coinNoise.play()
+      this.setState({ collected: this.state.collected + 1 })
+    }, 300);
+  }
+
   render() {
+
     return (
       <Loop>
-        <Stage style={{ background: "url('assets/stars - fast.gif')" }}>
+        <Stage style="height:85%; width=100%;" style={{ background: "url('../assets/stars - fast.gif')" }}>
+          <h2 id="baconCount" className="collected">Bacon: {this.state.collected}</h2>
           <World onInit={this.physicsInit}>
             <Level store={GameStore} />
             <Character
               store={GameStore}
               keys={this.keyListener}
+              bacon={this.handleBacon}
             />
           </World>
         </Stage>

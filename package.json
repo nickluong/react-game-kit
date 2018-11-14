@@ -9,7 +9,7 @@
     "umd"
   ],
   "scripts": {
-    "start": "webpack-dev-server --hot --inline --port 3000 --config webpack.config.dev.js --content-base demo/",
+    "start": "webpack-dev-server --hot --inline --port 3001 --config webpack.config.dev.js --content-base demo/",
     "build": "babel src -d lib --copy-files",
     "clean": "rimraf dist",
     "clean-build": "rimraf lib",

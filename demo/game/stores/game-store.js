@@ -3,10 +3,16 @@ import { observable } from 'mobx';
 class GameStore {
   @observable characterPosition = { x: 50, y: 0 };
 
+  @observable baconPosition = { x: 800, y: 0 }
+
   @observable stageX = 0;
 
   setCharacterPosition(position) {
     this.characterPosition = position;
+  }
+
+  setBaconPosition(position) {
+    this.baconPosition = position;
   }
 
   setStageX(x) {

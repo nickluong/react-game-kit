@@ -35,7 +35,7 @@ export default class Intro extends Component {
   render() {
     return (
       <div>
-        <img className="intro" src="assets/intro.png" />
+        <img className="intro" src="../assets/intro.png" />
         <p
           id="help"
           className="start"
@@ -54,7 +54,9 @@ export default class Intro extends Component {
   handleKeyPress = e => {
     if (e.keyCode === 13) {
       this.startNoise.play();
-      this.props.onStart();
+      //this.props.onStart();
+      this.props.onStart()
+      this.props.history.push(`/game`)
     }
   };
 }
